@@ -78,7 +78,7 @@ class ApiController{
             $modulos["mensaje"] = "No existen módulos";
             array_push($modulos["usuario"], $item);
             $this->printJSON($modulos);
-        }
+        } 
     }
    
     // Categorías
