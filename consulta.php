@@ -5,20 +5,27 @@ include_once 'db.php';
 class Consulta extends DB{
    
     // Usuario por cédula
-    function obtenerUsuarioPorCedula($vusu){
-        $query = $this->connect()->query("SELECT * FROM usuario WHERE usu_cedula = $vusu AND usu_estado = 1");
+    function obtenerUsuarioPorCedula($vusu,$vcla){
+        $query = $this->connect()->query("SELECT * FROM usuario WHERE usu_cedula = $vusu AND usu_password = '$vcla' AND usu_esta_conectado <= usu_max_conectado  AND usu_estado = 1");
         return $query;
-    }   
+    }  
+    
+    // Modificar conectado
+    function actualizaConexionUsuario($vced,$vcon){
+
+        $query = $this->connect()->query("UPDATE usuario SET usu_esta_conectado = $vcon WHERE usu_cedula = $vced");
+        return $query;
+    }
     
     // Módulos
     function obtenerModulos(){
-        $query = $this->connect()->query("SELECT * FROM modulo WHERE mod_estado = 1");
+        $query = $this->connect()->query("SELECT * FROM modulo ORDER BY mod_id ASC");
         return $query;
     }
 
     // Categorías
     function obtenerCategorias(){
-        $query = $this->connect()->query("SELECT * FROM categoria WHERE cat_estado = 1");
+        $query = $this->connect()->query("SELECT * FROM categoria WHERE cat_estado = 1 ORDER BY cat_nombre ASC");
         return $query;
     }
 
@@ -48,7 +55,13 @@ class Consulta extends DB{
     
     // Recurso por tipo
     function obtenerRecursoPorTipo($vrec){
-        $query = $this->connect()->query("SELECT * FROM recurso WHERE rec_clave = $vrec AND rec_estado = 1");
+        $query = $this->connect()->query("SELECT * FROM recurso WHERE cre_id = $vrec AND rec_estado = 1");
+        return $query;
+    }
+    
+    // Recurso por nombre
+    function obtenerRecursoPorNombre($vrecn){
+        $query = $this->connect()->query("SELECT * FROM recurso WHERE cre_nombre = $vrec AND rec_estado = 1");
         return $query;
     } 
 }

@@ -6,14 +6,14 @@ class ApiController{
     private $error;
 
     // Usuario por id
-    function getUsuarioPorCedula($vusu){
+    function getUsuarioPorCedula($vusu,$vcla){
         $usuario = new Consulta();
         $usuarios = array();
         $usuarios["usuario"] = array();
         $usuarios["codigoError"] = 0;
         $usuarios["mensaje"] = "OK";
         $item = array();
-        $res = $usuario->obtenerUsuarioPorCedula($vusu);
+        $res = $usuario->obtenerUsuarioPorCedula($vusu,$vcla);
 
         if($res->rowCount() == 1){
             $row = $res->fetch();
@@ -25,7 +25,8 @@ class ApiController{
                 "email" => $row['usu_email'],
                 "login" => $row['usu_login'],
                 "password" => $row['usu_password'],
-                "conectado" => $row['usu_esta_conectado']
+                "conectado" => $row['usu_esta_conectado'],
+                "maximo" => $row['usu_max_conectado']
             );
             array_push($usuarios["usuario"], $item);
             $this->printJSON($usuarios);
@@ -37,12 +38,33 @@ class ApiController{
                 "email" => "",
                 "login" => "",
                 "password" => "",
-                "conectado" => ""
+                "conectado" => "",
+                "maximo" => ""
             );
             $usuarios["codigoError"] = 1;
-            $usuarios["mensaje"] = "No existe usuario";
+            $usuarios["mensaje"] = "Combinación usuario, clave incorrecta o alcanzó máximo de conexiones.";
             array_push($usuarios["usuario"], $item);
             $this->printJSON($usuarios);
+        }
+    }
+
+    // Actualiza esta_conectado de Usuario
+    function getActualizaConexionUsuario($vced,$vcon){
+        $usuario = new Consulta();
+        $usuarios = array();
+        $usuarios["usuario"] = array();
+        $usuarios["codigoError"] = 0;
+        $usuarios["mensaje"] = "Campo Actualizado";
+        $item = array();
+        $res = $usuario->actualizaConexionUsuario($vced,$vcon);  
+        if( $res == true){
+            array_push($usuarios["usuario"], $item);
+            $this->printJSON($usuarios);
+        }else{
+            $usuarios["codigoError"] = 1;
+            $usuarios["mensaje"] = "No se pudo actualizar el campo";
+            array_push($usuarios["usuario"], $item);
+            $this->printJSON($usuarios);  
         }
     }
 
@@ -346,9 +368,9 @@ class ApiController{
        
                 $item=array(
                     "id" => $row['rec_id'],
-                    "nombre" => $row['rec_nombre'],
-                    "imagen" => $row['rec_imagen'],
-                    "clave" => $row['rec_clave'],
+                    "campo" => $row['rec_campo'],
+                    "valor" => $row['rec_valor'],
+                    "tipo" => $row['cre_id'],
                     "estado" => $row['rec_estado']
                 );
                 array_push($recursos["recurso"], $item);
@@ -357,9 +379,9 @@ class ApiController{
         }else{
             $item=array(
                 "id" => "",
-                "nombre" => "",
-                "imagen" => "",
-                "clave" => "",
+                "campo" => "",
+                "valor" => "",
+                "tipo" => "",
                 "estado" => ""
             );
             $recursos["codigoError"] = 1;

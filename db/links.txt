@@ -1,0 +1,11 @@
+https://fernandor26.sg-host.com/admcrud/
+USRUARIO:     usrcrudrnpPASSWORD:  rnp2562JA**
+
+https://api.fernandor26.sg-host.com/usuario.php?vusu=1715361026
+https://api.fernandor26.sg-host.com/categoria.php
+https://api.fernandor26.sg-host.com/modulo.php
+https://api.fernandor26.sg-host.com/pelicula.php  
+https://api.fernandor26.sg-host.com/pelicula.php?vcat=2&vmod=1
+https://api.fernandor26.sg-host.com/pelicula.php?vcate=2  
+https://api.fernandor26.sg-host.com/pelicula.php?vpel=mul    
+https://api.fernandor26.sg-host.com/recurso.php?vrec=1

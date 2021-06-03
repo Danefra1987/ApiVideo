@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2021 a las 16:46:29
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 8.0.6
+-- Servidor: localhost
+-- Tiempo de generación: 03-06-2021 a las 14:46:14
+-- Versión del servidor: 5.7.32-35-log
+-- Versión de PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `rapinetapp`
+-- Base de datos: `dbhqf8khk1m0e7`
 --
 
 -- --------------------------------------------------------

@@ -8,7 +8,7 @@ class DB{
 
     public function __construct(){
         $this->host     = 'localhost';
-        $this->db       = 'rapinetApp';
+        $this->db       = 'rapinetapp';
         $this->user     = 'root';
         $this->password = '';
     }
