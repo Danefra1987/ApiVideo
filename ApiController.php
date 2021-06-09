@@ -57,15 +57,15 @@ class ApiController{
         $usuarios["mensaje"] = "Campo Actualizado";
         $item = array();
         $res = $usuario->actualizaConexionUsuario($vced,$vcon);  
-        if( $res == true){
-            array_push($usuarios["usuario"], $item);
-            $this->printJSON($usuarios);
-        }else{
-            $usuarios["codigoError"] = 1;
-            $usuarios["mensaje"] = "No se pudo actualizar el campo";
-            array_push($usuarios["usuario"], $item);
-            $this->printJSON($usuarios);  
-        }
+        //if( $res == true){
+        //    array_push($usuarios["usuario"], $item);
+        //    $this->printJSON($usuarios);
+        //}else{
+        //    $usuarios["codigoError"] = 1;
+        //    $usuarios["mensaje"] = "No se pudo actualizar el campo";
+        //    array_push($usuarios["usuario"], $item);
+        //    $this->printJSON($usuarios);  
+        //}
     }
 
     // Módulos
@@ -308,6 +308,60 @@ class ApiController{
         $peliculas["codigoError"] = 0;
         $peliculas["mensaje"] = "OK";
         $res = $pelicula->obtenerPeliculaPorNombre($vpel);
+
+        if($res->rowCount()){
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)){    
+                $item=array(
+                    "id" => $row['pel_id'],
+                    "nombre" => $row['pel_nombre'],
+                    "imagen" => $row['pel_imagen'],
+                    "descripcion" => $row['pel_descripcion'],
+                    "duracion" => $row['pel_duracion'],
+                    "anio" => $row['pel_anio'],
+                    "censura" => $row['pel_censura'],
+                    "reparto" => $row['pel_reparto'],
+                    "genero" => $row['pel_genero'],
+                    "destacado" => $row['pel_destacado'],
+                    "modulo" => $row['mod_id'],
+                    "categoria" => $row['cat_id'],
+                    "estado" => $row['pel_estado'],
+                    "url" => $row['pel_url']
+                );
+                array_push($peliculas["pelicula"], $item);
+            }
+            $this->printJSON($peliculas);
+        }else{
+            $item=array(
+                "id" => "",
+                "nombre" => "",
+                "imagen" => "",
+                "descripcion" => "",
+                "duracion" => "",
+                "anio" => "",
+                "censura" => "",
+                "reparto" => "",
+                "genero" => "",
+                "destacado" => "",
+                "modulo" => "",
+                "categoria" => "",
+                "estado" => "",
+                "url" => ""
+            );
+            $peliculas["codigoError"] = 1;
+            $peliculas["mensaje"] = "No existen películas";
+            array_push($peliculas["pelicula"], $item);
+            $this->printJSON($peliculas);
+        }
+    }
+    
+    //Películas por codigo
+    function getPeliculaPorCodigo($vpcod){
+        $pelicula = new Consulta();
+        $peliculas = array();
+        $peliculas["pelicula"] = array();
+        $peliculas["codigoError"] = 0;
+        $peliculas["mensaje"] = "OK";
+        $res = $pelicula->obtenerPeliculaPorCodigo($vpcod);
 
         if($res->rowCount()){
             while ($row = $res->fetch(PDO::FETCH_ASSOC)){    

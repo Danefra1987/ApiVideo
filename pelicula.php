@@ -15,6 +15,8 @@ switch($_SERVER['REQUEST_METHOD']){
             $api->getPeliculaPorCategoria($_GET['vcate']);
         }elseif(isset($_GET['vpel'])){
             $api->getPeliculaPorNombre($_GET['vpel']);
+        }elseif(isset($_GET['vpcod'])){
+            $api->getPeliculaPorCodigo($_GET['vpcod']);
         }else{
             $api->getPeliculas();
         }            

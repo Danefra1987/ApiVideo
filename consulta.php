@@ -53,6 +53,12 @@ class Consulta extends DB{
         return $query;
     } 
     
+     // Películas por codigo
+     function obtenerPeliculaPorCodigo($vpcod){
+        $query = $this->connect()->query("SELECT * FROM pelicula WHERE pel_id = $vpcod AND pel_estado = 1");
+        return $query;
+    } 
+
     // Recurso por tipo
     function obtenerRecursoPorTipo($vrec){
         $query = $this->connect()->query("SELECT * FROM recurso WHERE cre_id = $vrec AND rec_estado = 1");
