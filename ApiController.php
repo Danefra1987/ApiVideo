@@ -348,7 +348,7 @@ class ApiController{
                 "url" => ""
             );
             $peliculas["codigoError"] = 1;
-            $peliculas["mensaje"] = "No existen películas";
+            $peliculas["mensaje"] = "Intenta buscar otra pelicula, serie, video o dibujo";
             array_push($peliculas["pelicula"], $item);
             $this->printJSON($peliculas);
         }
